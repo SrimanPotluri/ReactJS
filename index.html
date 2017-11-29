@@ -1,0 +1,66 @@
+<!-- DOCTYPE HTML -->
+<html>
+<head>
+<title>Your First React Project</title>
+</head>
+<body>
+<div id="content"></div>
+<script src="https://fb.me/react-0.14.6.js"></script>
+<script src="https://fb.me/react-dom-0.14.6.js"></script>
+<script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
+<script type="text/jsx">
+/*Add your React code here*/
+
+/* creating the main component App with child components*/
+var App = React.createClass({
+  render: function(){
+    return (<div>WELCOME TO MY WORLD
+      <Profile
+          name={this.props.profileData.name}
+          imgURL={this.props.profileData.imgURL}/>
+      <Hobbies
+          hobbyList={this.props.profileData.hobbyList} />
+      </div>);
+  }
+});
+
+/* creating child component Profile*/
+var Profile = React.createClass({
+  render: function(){
+    return (<div>
+      <h3>{this.props.name}</h3>
+      <img src={this.props.imgURL} />
+      </div>);
+  }
+});
+
+/* creating child component Hobbies*/
+var Hobbies = React.createClass({
+  render: function(){
+    var hobbies = this.props.hobbyList.map(function(hobby, index){
+        return (<li key={index}>{hobby}</li>);
+    });
+
+    return (<div>
+      <h5> My Hobbies: </h5>
+      <ul>
+      {hobbies}
+      </ul>
+      </div>);
+  }
+});
+
+/* creating the DATA */
+var DATA = {
+    name: 'Srimannarayana Potluri',
+    imgURL: 'Sriman.jpg',
+    hobbyList: ['coding', 'jamming', 'reading']
+  };
+
+/* rendering the main component App, passing DATA to the App component */
+ReactDOM.render(<App profileData={DATA} />,document.getElementById('content'));
+
+
+</script>
+</body>
+</html>
